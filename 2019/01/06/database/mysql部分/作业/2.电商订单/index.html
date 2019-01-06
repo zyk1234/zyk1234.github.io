@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="电商平台代码主控制台文件名main.py import order, user, good #依赖的包  if __name__ == &amp;apos;__main__&amp;apos;:     u = user.User()     g = good.Good()      flag = input(&amp;quot;请选择 1：注册用户 2：添加商品 3：修改密码  4：下单&amp;quot;)     if f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/01/06/database/mysql部分/作业/2.电商订单/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="电商平台代码主控制台文件名main.py import order, user, good #依赖的包  if __name__ == &amp;apos;__main__&amp;apos;:     u = user.User()     g = good.Good()      flag = input(&amp;quot;请选择 1：注册用户 2：添加商品 3：修改密码  4：下单&amp;quot;)     if f">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-05T15:07:40.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="电商平台代码主控制台文件名main.py import order, user, good #依赖的包  if __name__ == &amp;apos;__main__&amp;apos;:     u = user.User()     g = good.Good()      flag = input(&amp;quot;请选择 1：注册用户 2：添加商品 3：修改密码  4：下单&amp;quot;)     if f">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/06/database/mysql部分/作业/2.电商订单/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/database/mysql部分/作业/2.电商订单/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-06 15:45:59" itemprop="dateCreated datePublished" datetime="2019-01-06T15:45:59+08:00">2019-01-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-05 23:07:40" itemprop="dateModified" datetime="2019-01-05T23:07:40+08:00">2019-01-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="电商平台代码"><a href="#电商平台代码" class="headerlink" title="电商平台代码"></a>电商平台代码</h1><h2 id="主控制台"><a href="#主控制台" class="headerlink" title="主控制台"></a>主控制台</h2><p>文件名main.py</p>
+<pre><code>import order, user, good #依赖的包
+
+if __name__ == &apos;__main__&apos;:
+    u = user.User()
+    g = good.Good()
+
+    flag = input(&quot;请选择 1：注册用户 2：添加商品 3：修改密码  4：下单&quot;)
+    if flag == &quot;1&quot;:
+        u.register()
+    elif flag == &quot;2&quot;:
+        g.inserGood()
+    elif flag == &quot;3&quot;:
+        u.updatePwd()
+    else:
+        if u.rs == None:
+            u.login()  # 登录成功后返回用户信息
+        userId = u.rs[0]
+        o = order.Order(userId=userId)
+
+        # ---------------------begin下单-------------#
+        g.getGoods()
+        o.newOrder()
+        # ---------------------end下单-------------#
+
+        # ---------------------测试查询所有订单-------------#
+        o.getOrder()  # 查询所有订单
+        # ---------------------end测试查询所有订单-------------#
+
+        # ---------------------测试删除订单-------------#
+        o.deleteOrder()
+        # ---------------------end测试删除订单-------------#
+</code></pre><h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>文件名user.py</p>
+<pre><code>import userdao, util #依赖userdao.py和util.py
+
+
+class User:
+    def __init__(self):
+        self.rs = None
+
+    def register(self):
+        phoneNo = input(&quot;请输入手机号&quot;)
+        password = input(&quot;请输入密码&quot;)
+        # 判断手机号是否存在，如果存在返回
+        rs = userdao.getUser(phoneNo)
+        if rs[0] &gt; 0:
+            print(&apos;此用户已存在&apos;)
+            return
+        else:
+            pwd = util.getMd5(password)  # 1.防止sql注入，2.防止数据库被攻击后，用户信息丢失，对于个人的隐私信息，存入到数据库中，可以选择密文存储
+            userdao.insertUser(phoneNo=phoneNo, password=pwd)
+
+    def login(self):
+        phoneNo = input(&quot;请输入手机号&quot;)
+        password = input(&quot;请输入密码&quot;)
+        pwd=util.getMd5(password)
+        self.rs = userdao.getUserByPhoneNoAndPwd(phoneNo, pwd)
+        if self.rs:
+            print(&apos;登录成功&apos;)
+            return 1
+        else:
+            print(&apos;登录失败&apos;)
+            return 2
+
+    def updatePwd(self):
+        if self.rs == None:
+            self.login()
+        password = input(&quot;请输入新密码&quot;)
+        pwd = util.getMd5(password)
+        if userdao.modifyPassword(userId=self.rs[0], password=pwd)==True:
+            print(&apos;修改成功&apos;)
+</code></pre><p>userdao.py 内容如下:</p>
+<pre><code>import dbmysql, util #依赖dbmysql和util
+
+
+def getUser(phoneNo):
+    try:
+        sql = &quot;select count(*) from user where phoneNo=&apos;%s&apos;;&quot; % phoneNo
+        rs = dbmysql.first(sql)
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+        return False
+
+
+def insertUser(phoneNo, password):
+    try:
+        sql = &quot;insert into user(userId,insertTime,opertionTime,phoneNo,password) values (uuid(),now(),now(),&apos;%s&apos;,&apos;%s&apos;);&quot; % (
+            phoneNo, password)
+        dbmysql.execute(sql)
+    except Exception as e:
+        util.logger.error(e)
+        return False
+
+#根据用户名密码判断此用户是否存在
+def getUserByPhoneNoAndPwd(phoneNo, password):
+    try:
+        sql = &quot;select * from user where phoneNo=&apos;%s&apos; and password=&apos;%s&apos;;&quot; % (phoneNo, password)
+        rs = dbmysql.first(sql)
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+        return False
+
+#密码修改
+def modifyPassword(password, userId):
+    try:
+        sql = &quot;update user set password=&apos;%s&apos; where userId=&apos;%s&apos;;&quot; % (password, userId)
+        dbmysql.execute(sql)
+        return True
+    except Exception as e:
+        util.logger.error(e)
+        return False
+</code></pre><h2 id="商品模块"><a href="#商品模块" class="headerlink" title="商品模块"></a>商品模块</h2><p>good.py内容如下：</p>
+<pre><code>import gooddao #依赖gooddao
+
+class Good:
+    def __init__(self):
+        pass
+
+    def inserGood(self):
+        goodName = input(&quot;请输入商品名称&quot;)
+        goodPrice = float(input(&quot;请输入商品价格&quot;))
+        goodKc = int(input(&quot;请输入商品库存&quot;))
+        gooddao.insertGood(goodname=goodName, goodkc=goodKc, goodprice=goodPrice)
+
+    def getGoods(self):
+        rs = gooddao.getGood()
+        for item in rs:
+            print(&quot;商品Id：&quot;, item[0], &quot;商品名称：&quot;, item[3], &quot;商品价格：&quot;, item[4], &quot;商品库存：&quot;, item[5])
+</code></pre><p>gooddao.py内容如下：</p>
+<pre><code>import util, dbmysql #依赖dbmysql
+#插入商品表
+def insertGood(goodname, goodprice, goodkc):
+    try:
+        sql = &quot;insert into good(goodId,insertTime,opertionTime,goodName,price,num) values (uuid(),now(),now(),&apos;%s&apos;,%s,&apos;%s&apos;);&quot; % (
+            goodname, goodprice, goodkc)
+        dbmysql.execute(sql)
+    except Exception as e:
+        util.logger.error(e)
+        return False
+
+#获取商品信息
+def getGood():
+    try:
+        sql = &quot;select * from good order by insertTime;&quot;
+        rs = dbmysql.fetchall(sql)
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+        return False
+</code></pre><h2 id="订单"><a href="#订单" class="headerlink" title="订单"></a>订单</h2><p>order.py文件内容如下：</p>
+<pre><code>import orderdao #依赖orderdao.py文件
+
+
+class Order():
+    def __init__(self, userId):
+        self.userId = userId
+
+    def newOrder(self):
+        goods = []
+        while 1:
+            goodId = input(&quot;请输入要购买的商品Id：&quot;)
+            num = input(&quot;请输入要购买的数量&quot;)
+            goods.append({&quot;goodId&quot;: goodId, &quot;num&quot;: num})
+            iscontinue = input(&quot;是否继续购买？Y or N&quot;)
+            if iscontinue.lower() == &quot;n&quot;:
+                break
+        # 下单
+        # TODO 订单表中插入数据，订单商品表中插入数据,事务操作，要么都成功，要么全失败
+        orderdao.neworder(goods, self.userId)
+
+    # 得到所有订单
+    def getOrder(self):
+        rs=orderdao.getOrder()
+        for item in rs:
+            print(item)
+
+    #删除订单
+    def deleteOrder(self):
+        orderId=input(&quot;请输入要删除的订单编号&quot;)
+        # TODO 如果数据库中有外键设置，删除订单表的时候，会自动删除订单商品表
+        orderdao.deleteOrder(orderId)
+</code></pre><p>orderdao.py文件内容如下:</p>
+<pre><code>import dbmysql, util
+
+def neworder(goods, userId):
+    try:
+        sqllist = []
+        # 订单表
+        orderId = util.getuuid()
+        sql = &quot;insert into `order`(orderId,insertTime,opertionTime,userId) values (&apos;%s&apos;,now(),now(),&apos;%s&apos;);&quot; % (
+            orderId, userId)
+        sqllist.append(sql)
+        for item in goods:
+            sql = &quot;insert into ordergood(orderId,goodId,num,insertTime,orderTime) values (&apos;%s&apos;,&apos;%s&apos;,%s,now(),now());&quot; % (
+                orderId, item[&quot;goodId&quot;], item[&quot;num&quot;])
+            sqllist.append(sql)
+        # 此时要求以上的所有语句要么全部成功要么全部失败，事务操作
+
+        # TODO，还可以把这些东西写成存储过程，然后此处执行存储过程
+        dbmysql.execute2(sqllist)
+    except Exception as e:
+        util.logger.error(e)
+
+#获取全部订单或者根据Id获取订单信息
+def getOrder(oderId=None):
+    try:
+        sql = &quot;select u.phoneNo,o.orderId,g.goodname,g.price,og.num from user as u,`order` as o,good as g,ordergood as og where &quot;
+        if oderId != None:
+            sql += &quot; o.orderId=&apos;%s&apos; and &quot;%oderId
+        sql += &quot;u.userId=o.userId and o.orderId=og.orderId and og.goodId=g.goodId;&quot;
+
+        rs = dbmysql.fetchall(sql)
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+
+#根据订单ID删除订单，注意外键操作
+def deleteOrder(orderId):
+    try:
+        # 如果没有设置外键，需要两条都执行
+        sql = &quot;delete from `order` where orderId=&apos;%s&apos;;&quot; % orderId
+
+
+        #没有设置外键时   事务操作   -----begin-----------#
+        # sql2 = &quot;delete from ordergood where orderId=&apos;%s&apos;;&quot; % orderId
+        # dbmysql.execute2([sql, sql2])
+        # 没有设置外键时   事务操作   -----end-----------#
+
+        # 如果设置外键，并且是级联删除CASCADE,执行下面这句
+        dbmysql.execute(sql)
+    except Exception as e:
+        util.logger.error(e)
+</code></pre><h2 id="dbmysql和util"><a href="#dbmysql和util" class="headerlink" title="dbmysql和util"></a>dbmysql和util</h2><p>util.py文件内容如下：</p>
+<pre><code>import logging,uuid,hashlib
+
+#配置日志
+logging.basicConfig(level=logging.INFO, format=&apos;[%(asctime)s -%(filename)s- %(name)s - %(levelname)s] - %(message)s&apos;)
+logger = logging.getLogger(__name__)
+
+#获取uuid
+def getuuid():
+    return str(uuid.uuid4())
+
+#获取md5密文
+def getMd5(source):
+    m1 = hashlib.md5()
+    # 使用md5对象里的update方法md5转换
+    m1.update(source.encode(&quot;utf-8&quot;))
+    hexd = m1.hexdigest()
+    return hexd
+</code></pre><p>dbmysql.py文件内容如下:</p>
+<pre><code>import pymysql
+import util
+
+&apos;&apos;&apos;
+操作mysql第一步：创建连接，返回连接对象和游标
+&apos;&apos;&apos;
+
+host = &quot;127.0.0.1&quot;  # 本地的ip地址
+port = 33006  # 端口号
+user = &quot;root&quot;  # 数据库的用户名
+passwd = &quot;123456&quot;  # 数据库的密码
+db = &quot;ddd3&quot;  # 你要连接的数据库名称
+
+
+def getConnection():
+    try:
+        conn = pymysql.connect(host=host, port=port, user=user, passwd=passwd, charset=&quot;utf8&quot;, db=db)
+        cur = conn.cursor()
+        return conn, cur
+    except Exception as e:
+        util.logger.error(e)
+        return None
+
+
+&apos;&apos;&apos;
+第二步：创建增删改的方法，此方式用于insert、update、delete,create table|database,alter,drop databse|table
+&apos;&apos;&apos;
+
+
+def execute(sql):
+    # 获取连接
+    conn, cur = getConnection()
+    try:
+        # 游标执行sql语句
+        f = cur.execute(sql)
+        # 连接进行事务提交
+        conn.commit()
+        # 如果程序执行无误，返回True
+        return True
+    except Exception as e:
+        util.logger.error(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+# 事务的
+def execute2(sql):
+    # 获取连接
+    conn, cur = getConnection()
+    try:
+        conn.begin()
+        # 游标执行sql语句
+        for item in sql:
+            cur.execute(item)
+        # 连接进行事务提交
+        conn.commit()
+        # 如果程序执行无误，返回True
+        return True
+    except Exception as e:
+        util.logger.error(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+def executeMany(sql, values):
+    # 获取连接
+    conn, cur = getConnection()
+    try:
+        # 游标执行sql语句
+        cur.executemany(sql, values)
+        # 连接进行事务提交
+        conn.commit()
+        # 如果程序执行无误，返回True
+        return True
+    except Exception as e:
+        util.logger.error(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+&apos;&apos;&apos;
+第三步：创建返回第一条数据方法，此方式用于select one
+&apos;&apos;&apos;
+
+
+def first(sql):
+    # 获取连接
+    conn, cur = getConnection()
+    try:
+        # 游标执行sql语句
+        cur.execute(sql)
+        # fetchone
+        rs = cur.fetchone()
+        # 连接进行事务提交
+        conn.commit()
+        # 如果程序执行无误，返回True
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+&apos;&apos;&apos;
+第三步：创建返回多条数据方法
+&apos;&apos;&apos;
+
+
+def fetchall(sql):
+    # 获取连接
+    conn, cur = getConnection()
+    try:
+        # 游标执行sql语句
+        cur.execute(sql)
+        # fetchone
+        rs = cur.fetchall()
+        # 连接进行事务提交
+        conn.commit()
+        # 如果程序执行无误，返回True
+        return rs
+    except Exception as e:
+        util.logger.error(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/06/database/mysql部分/作业/1.导入数据/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/06/database/redis/1介绍/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#电商平台代码"><span class="nav-number">1.</span> <span class="nav-text">电商平台代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主控制台"><span class="nav-number">1.1.</span> <span class="nav-text">主控制台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户信息"><span class="nav-number">1.2.</span> <span class="nav-text">用户信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#商品模块"><span class="nav-number">1.3.</span> <span class="nav-text">商品模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#订单"><span class="nav-number">1.4.</span> <span class="nav-text">订单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dbmysql和util"><span class="nav-number">1.5.</span> <span class="nav-text">dbmysql和util</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

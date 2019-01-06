@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="ELK安装配置文档                                                                     冯 丨 凯                  冯 丨 凯                                     数据,虚拟化,运维,网络,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ELK安装配置文档                                                                     冯 丨 凯                  冯 丨 凯                                     数据,虚拟化,运维,网络,机器学习">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/chuann.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/1545789425109.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/cc.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/by.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/sa.png">
+<meta property="og:updated_time" content="2018-12-27T06:10:14.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="ELK安装配置文档                                                                     冯 丨 凯                  冯 丨 凯                                     数据,虚拟化,运维,网络,机器学习">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/ELK安装配置文档_files/chuann.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/database/elk部分/ELK安装配置文档/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-06 15:45:56" itemprop="dateCreated datePublished" datetime="2019-01-06T15:45:56+08:00">2019-01-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-12-27 14:10:14" itemprop="dateModified" datetime="2018-12-27T14:10:14+08:00">2018-12-27</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!DOCTYPE html>
+<!-- saved from url=(0100)https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="generator" content="Hexo 3.8.0">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    ELK安装配置文档
+  
+</title>
+
+<meta name="description" content="elasticsearch 安装 环境配置 linux环境配置 创建elk用户并设置elk用户的密码 设置linux环境参数   java环境配置   elasticsearch安装   kibana安装 kibana汉化 kafka的搭建 kafka安装 kafka测试   logstash安装 filebeat安装 logstash 配置示例 elasticsearch 集群配置 el">
+<meta name="keywords" content="elasticsearch,logstash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK安装配置文档">
+<meta property="og:url" content="https://shaddy.gitee.io/myblog/2018/12/26/ELK安装配置文档/index.html">
+<meta property="og:site_name" content="冯 丨 凯">
+<meta property="og:description" content="elasticsearch 安装 环境配置 linux环境配置 创建elk用户并设置elk用户的密码 设置linux环境参数   java环境配置   elasticsearch安装   kibana安装 kibana汉化 kafka的搭建 kafka安装 kafka测试   logstash安装 filebeat安装 logstash 配置示例 elasticsearch 集群配置 el">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shaddy.gitee.io/myblog/2018/12/26/ELK安装配置文档/1545789425109.png">
+<meta property="og:updated_time" content="2018-12-26T09:28:37.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ELK安装配置文档">
+<meta name="twitter:description" content="elasticsearch 安装 环境配置 linux环境配置 创建elk用户并设置elk用户的密码 设置linux环境参数   java环境配置   elasticsearch安装   kibana安装 kibana汉化 kafka的搭建 kafka安装 kafka测试   logstash安装 filebeat安装 logstash 配置示例 elasticsearch 集群配置 el">
+<meta name="twitter:image" content="https://shaddy.gitee.io/myblog/2018/12/26/ELK安装配置文档/1545789425109.png">
+
+
+  <link rel="alternative" href="https://shaddy.gitee.io/atom.xml" title="冯 丨 凯" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://shaddy.gitee.io/favicon.png">
+
+
+<link rel="stylesheet" href="./ELK安装配置文档_files/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="./ELK安装配置文档_files/main.css">
+
+
+
+
+
+
+<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+<body class="monochrome">
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="https://shaddy.gitee.io/myblog/" target="_blank" rel="noopener">冯 丨 凯</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar ps-container ps-theme-default ps-active-y" data-ps-id="4f8bae9b-e1ea-40e4-dacb-35a195a1a904">
+  <div class="header">
+    <h1 class="title"><a href="https://shaddy.gitee.io/myblog/" target="_blank" rel="noopener">冯 丨 凯</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">数据,虚拟化,运维,网络,机器学习</div>
+        
+        
+          <div class="author">冯 凯</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="https://shaddy.gitee.io/myblog/about" target="_blank" rel="noopener"><img src="./ELK安装配置文档_files/chuann.jpg"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;" target="_blank" rel="noopener">分类</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="https://shaddy.gitee.io/myblog/categories/linux/" target="_blank" rel="noopener">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="https://shaddy.gitee.io/myblog/categories/tool/" target="_blank" rel="noopener">tool</a><span class="category-list-count">1</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;" target="_blank" rel="noopener">标签</a>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="https://shaddy.gitee.io/myblog/tags/elasticsearch/" target="_blank" rel="noopener">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://shaddy.gitee.io/myblog/tags/linux/" target="_blank" rel="noopener">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://shaddy.gitee.io/myblog/tags/logstash/" target="_blank" rel="noopener">logstash</a><span class="tag-list-count">1</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;" target="_blank" rel="noopener">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://shaddy.gitee.io/myblog/archives/2018/" target="_blank" rel="noopener">2018</a><span class="archive-list-count">2</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://shaddy.gitee.io/myblog/" title="Homepage" target="_blank" rel="noopener">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://shaddy.gitee.io/myblog/archives" title="按年检索" target="_blank" rel="noopener">按年检索</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="http://www.51cto.com/" title="51CTO" target="_blank" rel="noopener">51CTO</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://www.jianshu.com/" title="简书" target="_blank" rel="noopener">简书</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="http://www.itpub.net/" title="ITPUB" target="_blank" rel="noopener">ITPUB</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://shaddy.gitee.io/myblog/shaddy" title="后花园" target="_blank" rel="noopener">后花园</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 198px; right: 3px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 80px;"></div></div></div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-ELK安装配置文档" class="article article-type-post">
+  
+    <h1 class="article-header">
+      ELK安装配置文档
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2018-12-26
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="https://shaddy.gitee.io/myblog/categories/tool/" target="_blank" rel="noopener">tool</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://shaddy.gitee.io/myblog/tags/elasticsearch/" target="_blank" rel="noopener">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://shaddy.gitee.io/myblog/tags/logstash/" target="_blank" rel="noopener">logstash</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry" data-pswp-uid="1">
+    <div class="toc">
+
+<!-- toc -->
+<ul>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-an-zhuang" target="_blank" rel="noopener">elasticsearch 安装</a><ul>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#huan-jing-pei-zhi" target="_blank" rel="noopener">环境配置</a><ul>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#linux-huan-jing-pei-zhi" target="_blank" rel="noopener">linux环境配置</a><ul>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#chuang-jian-elk-yong-hu-bing-she-zhi-elk-yong-hu-de-mi-ma" target="_blank" rel="noopener">创建elk用户并设置elk用户的密码</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#she-zhi-linux-huan-jing-can-shu" target="_blank" rel="noopener">设置linux环境参数</a></li>
+</ul>
+</li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#java-huan-jing-pei-zhi" target="_blank" rel="noopener">java环境配置</a></li>
+</ul>
+</li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-an-zhuang" target="_blank" rel="noopener">elasticsearch安装</a></li>
+</ul>
+</li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kibana-an-zhuang" target="_blank" rel="noopener">kibana安装</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kibana-han-hua" target="_blank" rel="noopener">kibana汉化</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-de-da-jian" target="_blank" rel="noopener">kafka的搭建</a><ul>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-an-zhuang" target="_blank" rel="noopener">kafka安装</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-ce-shi" target="_blank" rel="noopener">kafka测试</a></li>
+</ul>
+</li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#logstash-an-zhuang" target="_blank" rel="noopener">logstash安装</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#filebeat-an-zhuang" target="_blank" rel="noopener">filebeat安装</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#logstash-pei-zhi-shi-li" target="_blank" rel="noopener">logstash 配置示例</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-ji-qun-pei-zhi" target="_blank" rel="noopener">elasticsearch 集群配置</a></li>
+<li><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-shi-yong-shi-li-ji-qun-mo-shi-xia" target="_blank" rel="noopener">elasticsearch使用示例【集群模式下】</a></li>
+</ul>
+<!-- tocstop -->
+<p></p></div><p></p>
+<h1><span id="elasticsearch-an-zhuang">elasticsearch 安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h1><h2><span id="huan-jing-pei-zhi">环境配置</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#huan-jing-pei-zhi" class="header-anchor" target="_blank" rel="noopener"></a></h2><h3><span id="linux-huan-jing-pei-zhi">linux环境配置</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#linux-huan-jing-pei-zhi" class="header-anchor" target="_blank" rel="noopener"></a></h3><h4><span id="chuang-jian-elk-yong-hu-bing-she-zhi-elk-yong-hu-de-mi-ma">创建elk用户并设置elk用户的密码</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#chuang-jian-elk-yong-hu-bing-she-zhi-elk-yong-hu-de-mi-ma" class="header-anchor" target="_blank" rel="noopener"></a></h4><blockquote>
+<p>elasticsearch默认不能在root用户下运行，所以需新创建一个elk用户，具体操作如下。<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ groupadd elk</span><br><span class="line">$ useradd -g elk -m elk</span><br><span class="line">$ passwd elk</span><br></pre></td></tr></tbody></table></figure><p></p>
+</blockquote>
+<h4><span id="she-zhi-linux-huan-jing-can-shu">设置linux环境参数</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#she-zhi-linux-huan-jing-can-shu" class="header-anchor" target="_blank" rel="noopener"></a></h4><ol>
+<li><p>修改limits.conf配置文件</p>
+<blockquote>
+<p>limits.conf是会话级别，退出会话重新登录需改即可生效。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/security/limits.conf</span><br><span class="line"> * soft nofile 65536</span><br><span class="line"> * hard nofile 131072</span><br><span class="line"> * soft nproc 2048</span><br><span class="line"> * hard nproc 4096</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+</li>
+<li><p>修改20-nproc.conf配置文件</p>
+<blockquote>
+<p>某些版本的linux的max user processes配置来源是20-nproc.conf，还需修改20-nproc.conf（centos6 是90-nproc.conf）。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/security/limits.d/20-nproc.conf</span><br><span class="line">* soft nproc 4096</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+</li>
+<li><p>设置sysctl.conf配置文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf</span><br><span class="line">vm.max_map_count=655360</span><br><span class="line">$ sysctl -p</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h3><span id="java-huan-jing-pei-zhi">java环境配置</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#java-huan-jing-pei-zhi" class="header-anchor" target="_blank" rel="noopener"></a></h3><blockquote>
+<p>elasticsearch 6.5.*需要jdk版本1.8，如果系统中没有jdk或者是jdk版本不符合要求，那么需要安装jdk，以下是在elk用户下安装jdk的示例。<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="comment">#以下是elk用户下</span></span><br><span class="line">$ tar -xzvf jdk-8u192-linux-x64.tar.gz </span><br><span class="line">$ mv jdk1.8.0_192/ jdk</span><br><span class="line">$ vi ~/.bash_profile</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/home/elk/soft/jdk</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/.<span class="built_in">local</span>/bin:<span class="variable">$HOME</span>/bin:/home/elk/soft/jdk/bin</span><br><span class="line">$ <span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></tbody></table></figure><p></p>
+</blockquote>
+<h2><span id="elasticsearch-an-zhuang">elasticsearch安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xzvf elasticsearch-6.5.2.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> elasticsearch-6.5.2/config</span><br><span class="line">$ vi elasticsearch.yml </span><br><span class="line">cluster.name: <span class="built_in">log</span>-dig</span><br><span class="line">node.name: node1</span><br><span class="line"><span class="comment">#elasticsearch数据的存储路径</span></span><br><span class="line">path.data: /xxx/data</span><br><span class="line"><span class="comment">#elasticsearch日志路径</span></span><br><span class="line">path.logs: /xxx/logs</span><br><span class="line"><span class="comment">#绑定监听IP</span></span><br><span class="line">network.host: 192.168.0.xxx</span><br><span class="line"><span class="comment">#设置对外服务的http端口,默认为9200</span></span><br><span class="line">http.port: 9200</span><br><span class="line">$ <span class="built_in">cd</span> ..</span><br><span class="line">$ bin/elasticsearch -d</span><br><span class="line">$ <span class="comment">#测试安装是否成功</span></span><br><span class="line">$ curl 192.168.0.xxx:9200</span><br><span class="line">{</span><br><span class="line">  <span class="string">"name"</span> : <span class="string">"node1"</span>,</span><br><span class="line">  <span class="string">"cluster_name"</span> : <span class="string">"log-dig"</span>,</span><br><span class="line">  <span class="string">"cluster_uuid"</span> : <span class="string">"EFpju3lYSeOL3Vs5bLM81A"</span>,</span><br><span class="line">  <span class="string">"version"</span> : {</span><br><span class="line">    <span class="string">"number"</span> : <span class="string">"6.5.3"</span>,</span><br><span class="line">    <span class="string">"build_flavor"</span> : <span class="string">"default"</span>,</span><br><span class="line">    <span class="string">"build_type"</span> : <span class="string">"tar"</span>,</span><br><span class="line">    <span class="string">"build_hash"</span> : <span class="string">"159a78a"</span>,</span><br><span class="line">    <span class="string">"build_date"</span> : <span class="string">"2018-12-06T20:11:28.826501Z"</span>,</span><br><span class="line">    <span class="string">"build_snapshot"</span> : <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"lucene_version"</span> : <span class="string">"7.5.0"</span>,</span><br><span class="line">    <span class="string">"minimum_wire_compatibility_version"</span> : <span class="string">"5.6.0"</span>,</span><br><span class="line">    <span class="string">"minimum_index_compatibility_version"</span> : <span class="string">"5.0.0"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="string">"tagline"</span> : <span class="string">"You Know, for Search"</span></span><br><span class="line">}</span><br><span class="line">$ <span class="comment">#启动elasticsearch</span></span><br><span class="line">$ bin/elasticsearch -d</span><br><span class="line">$ <span class="comment">#停止elasticsearch</span></span><br><span class="line">$ jps</span><br><span class="line">28410 Elasticsearch</span><br><span class="line">$ <span class="built_in">kill</span> -15 28410</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h1><span id="kibana-an-zhuang">kibana安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kibana-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xzvf kibana-6.5.2-linux-x86_64.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> kibana-6.5.3-linux-x86_64/</span><br><span class="line">$ vi config/kibana.yml </span><br><span class="line">server.name: <span class="string">"namefordisplay"</span></span><br><span class="line"><span class="comment">#kinaba绑定ip设置</span></span><br><span class="line">server.host: <span class="string">"192.168.0.xxx"</span></span><br><span class="line">server.port: 5601</span><br><span class="line">elasticsearch.url: <span class="string">"http://192.168.0.xxx:9200"</span></span><br><span class="line">$ screen bin/kibana -c config/kibana.yml</span><br><span class="line">CTRL+a d</span><br><span class="line">$ <span class="comment">#停止kibana</span></span><br><span class="line">$ ps -ef | grep node</span><br><span class="line">els        9514     1  1 Dec21 ?        01:30:02 ./../node/bin/node --no-warnings ./../src/cli</span><br><span class="line">els       14516  9514  0 Dec21 ?        00:00:13 /home/es/kibana-6.5.3-linux-x86_64/node/bin/node --no-warnings /home/es/kibana-6.5.3-linux-x86_64/node_modules/x-pack/plugins/canvas/server/lib/route_expression/thread/babeled.js</span><br><span class="line">$ <span class="built_in">kill</span> -15 9514</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>验证kibana是否安装成功，<a href="http://192.168.0.xxx:5601/" target="_blank" rel="noopener">http://192.168.0.xxx:5601</a></p>
+</blockquote>
+<center><figure class="article-gallery-img" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject"><a href="./ELK安装配置文档_files/1545789425109.png" title="Alt text"><img src="./ELK安装配置文档_files/1545789425109.png" alt="Alt text"><figcaption class="caption">Alt text</figcaption></a></figure></center>
+
+<hr>
+<h1><span id="kibana-han-hua">kibana汉化</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kibana-han-hua" class="header-anchor" target="_blank" rel="noopener"></a></h1><blockquote>
+<p>Kibana_Hanization汉化需要python2.7环境，一般安装linux都会自带python2.7环境<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ unzip Kibana_Hanization-master.zip</span><br><span class="line">$ <span class="comment">#执行下面命令汉化kibana</span></span><br><span class="line">$ <span class="built_in">cd</span> Kibana_Hanization-master/</span><br><span class="line">$ python main.py /path_for_kibana/kibana-6.5.2-linux-x86_64/</span><br></pre></td></tr></tbody></table></figure><p></p>
+</blockquote>
+<hr>
+<h1><span id="kafka-de-da-jian">kafka的搭建</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-de-da-jian" class="header-anchor" target="_blank" rel="noopener"></a></h1><h2><span id="kafka-an-zhuang">kafka安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvzf kafka_2.11-2.0.0.tar.gz -C /usr/<span class="built_in">local</span>/elk/</span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0/config </span><br><span class="line">$ vim zookeeper.properties</span><br><span class="line"><span class="comment"># zookeeper的data路径</span></span><br><span class="line">dataDir=/usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0/zookeeper/data</span><br><span class="line"><span class="comment"># zookeeper的log路径</span></span><br><span class="line">dataLogDir=/usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0/zookeeper/logs</span><br><span class="line"><span class="comment"># zookeeper的端口号</span></span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="comment"># zookeeper的客户端连接数，设置成0为无限制连接。</span></span><br><span class="line">maxClientCnxns=0</span><br><span class="line">$ <span class="comment">#配置server.properties文件，修改该配置文件中的以下参数：</span></span><br><span class="line">$ vim server.properties</span><br><span class="line"><span class="comment">#服务端口，默认9092</span></span><br><span class="line">port=9092</span><br><span class="line"><span class="comment">#监听地址</span></span><br><span class="line">host.name=192.168.106.xxx</span><br><span class="line"><span class="comment">#日志文件存储路径</span></span><br><span class="line">log.dirs=/usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0/kafka/logs</span><br><span class="line"><span class="comment">#Zookeeper quorum设置，如果有多个使用逗号分割。</span></span><br><span class="line">zookeeper.connect=192.168.106.226:2181</span><br><span class="line">$ <span class="comment">#启动zookeeper</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0</span><br><span class="line">$ bin/zookeeper-server-start.sh  config/zookeeper.properties 1&gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">$ <span class="comment">#启动kafka</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0</span><br><span class="line">$ bin/kafka-server-start.sh  config/server.properties 1&gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">$ <span class="comment">#停止zookeeper</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0</span><br><span class="line">$ bin/zookeeper-server-stop.sh  config/zookeeper.properties</span><br><span class="line">$ <span class="comment">#停止kafka</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0</span><br><span class="line">$ bin/kafka-server-stop.sh  config/server.properties</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="kafka-ce-shi">kafka测试</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#kafka-ce-shi" class="header-anchor" target="_blank" rel="noopener"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="comment">#执行下面的命令创建一个topic，名称为“testTopic”：</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/kafka_2.11-2.0.0</span><br><span class="line">$ bin/kafka-topics.sh --create --zookeeper 192.168.0.xxx:2181 --replication-factor 1 --partitions 1 --topic testTopic</span><br><span class="line">$ <span class="comment">#执行下面的命令查看topic：</span></span><br><span class="line">$ bin/kafka-topics.sh --list --zookeeper 192.168.0.xxx:2181</span><br><span class="line">$ <span class="comment">#执行下面的命令测试生产消息</span></span><br><span class="line">$ bin/kafka-console-producer.sh --broker-list 192.168.0.xxx:9092 --topic testTopic</span><br><span class="line">this is <span class="built_in">test</span></span><br><span class="line">$ <span class="comment">#执行下面的命令测试消费消息</span></span><br><span class="line">$ bin/kafka-console-consumer.sh --bootstrap-server 192.168.0.xxx:9092 --topic testTopic --from-beginning</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h1><span id="logstash-an-zhuang">logstash安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#logstash-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvzf logstash-6.5.2.tar.gz -C /usr/<span class="built_in">local</span>/elk/</span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/logstash-6.5.2/config</span><br><span class="line">$ vim logstash.conf</span><br><span class="line">input {</span><br><span class="line">        kafka {</span><br><span class="line">                codec =&gt; <span class="string">"json"</span></span><br><span class="line">                topics_pattern =&gt; <span class="string">"government_.*"</span></span><br><span class="line">                bootstrap_servers =&gt; <span class="string">"192.168.0.xxx:9092"</span></span><br><span class="line">                auto_offset_reset =&gt; <span class="string">"latest"</span></span><br><span class="line">                group_id =&gt; <span class="string">"government"</span></span><br><span class="line">               }</span><br><span class="line">     }</span><br><span class="line">output {</span><br><span class="line">        <span class="comment">#file {</span></span><br><span class="line">        <span class="comment">#       path =&gt; "/home/soft/elk/logstash-6.5.3/logstash.output"</span></span><br><span class="line">        <span class="comment">#     }</span></span><br><span class="line">        elasticsearch {</span><br><span class="line">                        hosts =&gt;[<span class="string">"192.168.0.xxx:9200"</span>]</span><br><span class="line">                        index =&gt; <span class="string">"%{[fields][log_topics]}"</span></span><br><span class="line">                      }</span><br><span class="line">        <span class="comment">#stdout { codec =&gt; rubydebug }</span></span><br><span class="line">      }</span><br><span class="line">$ <span class="comment">#后台启动logstash</span></span><br><span class="line">$ nohup bin/logstash -f /usr/<span class="built_in">local</span>/elk/logstash-6.5.2/configlogstash.conf &amp;</span><br><span class="line">$ <span class="comment">#停止logstash</span></span><br><span class="line">$ jps</span><br><span class="line">30997 Jps</span><br><span class="line">32026 Logstash</span><br><span class="line">$ <span class="built_in">kill</span> -15 32026</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h1><span id="filebeat-an-zhuang">filebeat安装</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#filebeat-an-zhuang" class="header-anchor" target="_blank" rel="noopener"></a></h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvzf filebeat-6.5.3-linux-x86_64.tar.gz -C /usr/<span class="built_in">local</span>/elk/</span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/filebeat-6.5.3-linux-x86_64</span><br><span class="line">$ vim filebeat.yml</span><br><span class="line">filebeat.prospectors:</span><br><span class="line"><span class="comment">#government_debug日志</span></span><br><span class="line">- <span class="built_in">type</span>: <span class="built_in">log</span></span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  paths:</span><br><span class="line">    - /usr/<span class="built_in">local</span>/apache-tomcat-8.5.31/government_sllogs/debug.log</span><br><span class="line">  fields:</span><br><span class="line">    log_topics: government_debug</span><br><span class="line"></span><br><span class="line"><span class="comment">#government_info日志</span></span><br><span class="line">- <span class="built_in">type</span>: <span class="built_in">log</span></span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  paths:</span><br><span class="line">    - /usr/<span class="built_in">local</span>/apache-tomcat-8.5.31/government_sllogs/info.log</span><br><span class="line">  fields:</span><br><span class="line">    log_topics: government_info</span><br><span class="line"></span><br><span class="line"><span class="comment">#government_warn日志</span></span><br><span class="line">- <span class="built_in">type</span>: <span class="built_in">log</span></span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  paths:</span><br><span class="line">    - /usr/<span class="built_in">local</span>/apache-tomcat-8.5.31/government_sllogs/warn.log</span><br><span class="line">  fields:</span><br><span class="line">    log_topics: government_warn</span><br><span class="line"></span><br><span class="line"><span class="comment">#government_error日志</span></span><br><span class="line">- <span class="built_in">type</span>: <span class="built_in">log</span></span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  paths:</span><br><span class="line">- /usr/<span class="built_in">local</span>/apache-tomcat-8.5.31/government_sllogs/error.log</span><br><span class="line">  fields:</span><br><span class="line">    log_topics: government_error</span><br><span class="line"><span class="comment">#多行日志合并</span></span><br><span class="line">  multiline:</span><br><span class="line">       pattern: <span class="string">'^\d{4}-\d{2}-\d{2}\s{1,5}[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'</span></span><br><span class="line">       negate:  <span class="literal">true</span></span><br><span class="line">       match:   after</span><br><span class="line">       max_lines: 500</span><br><span class="line">       timeout: 10s</span><br><span class="line">  tail_files: <span class="literal">true</span></span><br><span class="line"><span class="comment">#日志输出到kafka</span></span><br><span class="line">output.kafka:</span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  hosts: [<span class="string">"192.168.0.xxx:9092"</span>]</span><br><span class="line">  topic: <span class="string">'%{[fields][log_topics]}'</span></span><br><span class="line">$ <span class="comment">#启动filebeat</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/elk/filebeat-6.5.3-linux-x86_64</span><br><span class="line">$ nohup ./filebeat -e -c filebeat.yml &gt; filebeat.log &amp;</span><br><span class="line">$ <span class="comment">#停止filebeat</span></span><br><span class="line">$ ps -ef |grep filebeat</span><br><span class="line">$ <span class="built_in">kill</span> -15 pid</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h1><span id="logstash-pei-zhi-shi-li">logstash 配置示例</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#logstash-pei-zhi-shi-li" class="header-anchor" target="_blank" rel="noopener"></a></h1><figure class="highlight dsconfig"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input </span>{</span><br><span class="line">   <span class="comment">#filebeat配置</span></span><br><span class="line">   <span class="comment">#filebeats配置</span></span><br><span class="line">   <span class="string">beats </span>{</span><br><span class="line">      <span class="string">port </span>=&gt; <span class="string">5044</span></span><br><span class="line"><span class="string"> </span>  }</span><br><span class="line">   <span class="comment">#tcp网络数据传输，回车是一行</span></span><br><span class="line">   <span class="string">tcp </span>{</span><br><span class="line">	  <span class="string">port </span>=&gt; <span class="string">5045</span></span><br><span class="line"><span class="string">	</span>  <span class="string">type </span>=&gt; <span class="string">"tcp"</span></span><br><span class="line">   }</span><br><span class="line">   <span class="comment">#文件读取配置</span></span><br><span class="line">   <span class="string">file </span>{</span><br><span class="line">        <span class="string">path </span>=&gt; <span class="string">"/var/log/messages"</span></span><br><span class="line">        <span class="string">type </span>=&gt; <span class="string">"system"</span></span><br><span class="line">        <span class="string">start_position </span>=&gt; <span class="string">"beginning"</span></span><br><span class="line">    }   </span><br><span class="line">    <span class="string">file </span>{</span><br><span class="line">        <span class="string">path </span>=&gt; <span class="string">"/var/log/secure"</span></span><br><span class="line">        <span class="string">type </span>=&gt; <span class="string">"secure"</span></span><br><span class="line">        <span class="string">start_position </span>=&gt; <span class="string">"beginning"</span></span><br><span class="line">    }   </span><br><span class="line">    <span class="string">file </span>{</span><br><span class="line">        <span class="string">path </span>=&gt; <span class="string">"/var/log/httpd/access_log"</span></span><br><span class="line">        <span class="string">type </span>=&gt; <span class="string">"http"</span></span><br><span class="line">        <span class="string">start_position </span>=&gt; <span class="string">"beginning"</span></span><br><span class="line">    }   </span><br><span class="line">    <span class="string">file </span>{</span><br><span class="line">        <span class="string">path </span>=&gt; <span class="string">"/usr/local/nginx/logs/elk.access.log"</span></span><br><span class="line">        <span class="string">type </span>=&gt; <span class="string">"nginx"</span></span><br><span class="line">        <span class="string">start_position </span>=&gt; <span class="string">"beginning"</span></span><br><span class="line">    } </span><br><span class="line">}</span><br><span class="line"><span class="string">filter </span>{</span><br><span class="line">   <span class="comment">#如果字段logIndex的值为"nginx"</span></span><br><span class="line">   <span class="string">if </span>[<span class="string">fields]</span>[<span class="string">logIndex]</span> == <span class="string">"nginx"</span> {</span><br><span class="line">      <span class="string">grok </span>{</span><br><span class="line">         <span class="string">match </span>=&gt; {</span><br><span class="line">            <span class="comment">#grok 正则匹配</span></span><br><span class="line">            <span class="string">grok </span>{</span><br><span class="line">		      <span class="string">"message"</span> =&gt; <span class="string">"%{IPORHOST:addre} - - \[%{HTTPDATE:log_timestamp}\] \"</span>%{<span class="string">WORD:verb}</span> %{<span class="string">URIPATHPARAM:request}</span> <span class="string">HTTP/</span>%{<span class="string">NUMBER:httpversion}</span>\<span class="string">" %{INT:status} %{INT:body_bytes_sent} \"</span>%{<span class="string">GREEDYDATA:http_referrer}</span>\<span class="string">" \"</span>%{<span class="string">GREEDYDATA:message}</span>\<span class="string">""</span></span><br><span class="line">         }</span><br><span class="line">      }</span><br><span class="line">      <span class="string">urldecode </span>{</span><br><span class="line">         <span class="string">charset </span>=&gt; <span class="string">"UTF-8"</span></span><br><span class="line">         <span class="string">field </span>=&gt; <span class="string">"url"</span></span><br><span class="line">      }</span><br><span class="line">      <span class="string">if </span>[<span class="string">upstreamtime]</span> == <span class="string">""</span> <span class="string">or </span>[<span class="string">upstreamtime]</span> == <span class="string">"null"</span> {</span><br><span class="line">         <span class="string">mutate </span>{</span><br><span class="line">            <span class="string">update </span>=&gt; { <span class="string">"upstreamtime"</span> =&gt; <span class="string">"0"</span> }</span><br><span class="line">         }</span><br><span class="line">      }</span><br><span class="line">      <span class="string">date </span>{</span><br><span class="line">         <span class="string">match </span>=&gt; [<span class="string">"logtime"</span>, <span class="string">"dd/MMM/yyyy:HH:mm:ss Z"</span>]</span><br><span class="line">         <span class="string">target </span>=&gt; <span class="string">"@timestamp"</span></span><br><span class="line">      }</span><br><span class="line">      <span class="string">mutate </span>{</span><br><span class="line">         <span class="string">convert </span>=&gt; { </span><br><span class="line">            <span class="string">"responsetime"</span> =&gt; <span class="string">"float"</span></span><br><span class="line">            <span class="string">"upstreamtime"</span> =&gt; <span class="string">"float"</span></span><br><span class="line">            <span class="string">"size"</span> =&gt; <span class="string">"integer"</span></span><br><span class="line">         } </span><br><span class="line">         <span class="string">remove_field </span> =&gt; [<span class="string">"port"</span>,<span class="string">"logtime"</span>,<span class="string">"message"</span>]</span><br><span class="line">      }</span><br><span class="line">   </span><br><span class="line">   }</span><br><span class="line">}</span><br><span class="line"><span class="string">output </span>{</span><br><span class="line">  <span class="string">if </span>[<span class="string">type]</span> == <span class="string">"system"</span> { </span><br><span class="line"></span><br><span class="line">        <span class="string">elasticsearch </span>{</span><br><span class="line">            <span class="string">hosts </span>=&gt; [<span class="string">"192.168.1.202:9200"</span>]</span><br><span class="line">            <span class="string">index </span>=&gt; <span class="string">"nagios-system-%{+YYYY.MM.dd}"</span></span><br><span class="line">        }       </span><br><span class="line">    }   </span><br><span class="line">    <span class="string">if </span>[<span class="string">type]</span> == <span class="string">"secure"</span> {</span><br><span class="line">        <span class="string">elasticsearch </span>{</span><br><span class="line">            <span class="string">hosts </span>=&gt; [<span class="string">"192.168.1.202:9200"</span>]</span><br><span class="line">            <span class="string">index </span>=&gt; <span class="string">"nagios-secure-%{+YYYY.MM.dd}"</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="string">if </span>[<span class="string">type]</span> == <span class="string">"http"</span> {</span><br><span class="line"></span><br><span class="line">        <span class="string">elasticsearch </span>{</span><br><span class="line">            <span class="string">hosts </span>=&gt; [<span class="string">"192.168.1.202:9200"</span>]</span><br><span class="line">            <span class="string">index </span>=&gt; <span class="string">"nagios-http-%{+YYYY.MM.dd}"</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="string">if </span>[<span class="string">type]</span> == <span class="string">"nginx"</span> {</span><br><span class="line"></span><br><span class="line">        <span class="string">elasticsearch </span>{</span><br><span class="line">            <span class="string">hosts </span>=&gt; [<span class="string">"192.168.1.202:9200"</span>]</span><br><span class="line">            <span class="string">index </span>=&gt; <span class="string">"nagios-nginx-%{+YYYY.MM.dd}"</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><span id="elasticsearch-ji-qun-pei-zhi">elasticsearch 集群配置</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-ji-qun-pei-zhi" class="header-anchor" target="_blank" rel="noopener"></a></h1><blockquote>
+<p>elasticsearch.yml文件配置示例<br></p><figure class="highlight roboconf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ======================== Elasticsearch Configuration =========================</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> Elasticsearch comes with reasonable defaults for most settings.</span></span><br><span class="line"><span class="comment">#       Before you set out to tweak and tune the configuration, make sure you</span></span><br><span class="line"><span class="comment">#       understand what are you trying to accomplish and the consequences.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The primary way of configuring a node is via this file. This template lists</span></span><br><span class="line"><span class="comment"># the most important settings you may want to configure for a production cluster.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Please consult the documentation for further information on configuration options:</span></span><br><span class="line"><span class="comment"># https://www.elastic.co/guide/en/elasticsearch/reference/index.html</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ---------------------------------- Cluster -----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Use a descriptive name for your cluster:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">cluster.name: logdig</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ------------------------------------ Node ------------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Use a descriptive name for the node:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">node.name: node3</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Add custom attributes to the node:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#node.attr.rack: r1</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ----------------------------------- Paths ------------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Path to directory where to store the data (separate multiple locations by comma):</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#path.data: /path/to/data</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Path to log files:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#path.logs: /path/to/logs</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ----------------------------------- Memory -----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Lock the memory on startup:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">bootstrap.memory_lock: false</span><br><span class="line">bootstrap.system_call_filter: false</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Make sure that the heap size is set to about half the memory available</span></span><br><span class="line"><span class="comment"># on the system and that the owner of the process is allowed to use this</span></span><br><span class="line"><span class="comment"># limit.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Elasticsearch performs poorly when the system is swapping the memory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ---------------------------------- Network -----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Set the bind address to a specific IP (IPv4 or IPv6):</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">network.host: 192.168.106.178</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Set a custom port for HTTP:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#http.port: 9200</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For more information, consult the network module documentation.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># --------------------------------- Discovery ----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Pass an initial list of hosts to perform discovery when new node is started:</span></span><br><span class="line"><span class="comment"># The default list of hosts is ["127.0.0.1", "[::1]"]</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">discovery.zen.ping.unicast.hosts: ["192.168.106.xxx", "192.168.106.yyy","192.168.106.zzz"]</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">discovery.zen.minimum_master_nodes: 2</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For more information, consult the zen discovery module documentation.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ---------------------------------- Gateway -----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Block initial recovery after a full cluster restart until N nodes are started:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#gateway.recover_after_nodes: 3</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For more information, consult the gateway module documentation.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ---------------------------------- Various -----------------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Require explicit names when deleting indices:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#action.destructive_requires_name: true</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+</blockquote>
+<blockquote>
+<p>在这3台服务器分别启动，命令如下：<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/elasticsearch -d</span><br></pre></td></tr></tbody></table></figure><p></p>
+</blockquote>
+<h1><span id="elasticsearch-shi-yong-shi-li-ji-qun-mo-shi-xia">elasticsearch使用示例【集群模式下】</span><a href="https://shaddy.gitee.io/myblog/2018/12/26/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#elasticsearch-shi-yong-shi-li-ji-qun-mo-shi-xia" class="header-anchor" target="_blank" rel="noopener"></a></h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line">$ curl 192.168.106.xxx:9200/_cat/shards</span><br><span class="line">$ curl 192.168.106.xxx:9200/_cluster/stats?pretty</span><br><span class="line">{</span><br><span class="line">  <span class="string">"_nodes"</span> : {</span><br><span class="line">    <span class="string">"total"</span> : 3,</span><br><span class="line">    <span class="string">"successful"</span> : 3,</span><br><span class="line">    <span class="string">"failed"</span> : 0</span><br><span class="line">  },</span><br><span class="line">  <span class="string">"cluster_name"</span> : <span class="string">"logdig"</span>,</span><br><span class="line">  <span class="string">"cluster_uuid"</span> : <span class="string">"EFpju3lYSeOL3Vs5bLM81A"</span>,</span><br><span class="line">  <span class="string">"timestamp"</span> : 1545803198329,</span><br><span class="line">  <span class="string">"status"</span> : <span class="string">"green"</span>,</span><br><span class="line">  <span class="string">"indices"</span> : {</span><br><span class="line">    <span class="string">"count"</span> : 15,</span><br><span class="line">    <span class="string">"shards"</span> : {</span><br><span class="line">      <span class="string">"total"</span> : 36,</span><br><span class="line">      <span class="string">"primaries"</span> : 23,</span><br><span class="line">      <span class="string">"replication"</span> : 0.5652173913043478,</span><br><span class="line">      <span class="string">"index"</span> : {</span><br><span class="line">        <span class="string">"shards"</span> : {</span><br><span class="line">          <span class="string">"min"</span> : 2,</span><br><span class="line">          <span class="string">"max"</span> : 5,</span><br><span class="line">          <span class="string">"avg"</span> : 2.4</span><br><span class="line">        },</span><br><span class="line">        <span class="string">"primaries"</span> : {</span><br><span class="line">          <span class="string">"min"</span> : 1,</span><br><span class="line">          <span class="string">"max"</span> : 5,</span><br><span class="line">          <span class="string">"avg"</span> : 1.5333333333333334</span><br><span class="line">        },</span><br><span class="line">        <span class="string">"replication"</span> : {</span><br><span class="line">          <span class="string">"min"</span> : 0.0,</span><br><span class="line">          <span class="string">"max"</span> : 1.0,</span><br><span class="line">          <span class="string">"avg"</span> : 0.8666666666666667</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"docs"</span> : {</span><br><span class="line">      <span class="string">"count"</span> : 991540,</span><br><span class="line">      <span class="string">"deleted"</span> : 634</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"store"</span> : {</span><br><span class="line">      <span class="string">"size_in_bytes"</span> : 594606668</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"fielddata"</span> : {</span><br><span class="line">      <span class="string">"memory_size_in_bytes"</span> : 1920,</span><br><span class="line">      <span class="string">"evictions"</span> : 0</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"query_cache"</span> : {</span><br><span class="line">      <span class="string">"memory_size_in_bytes"</span> : 0,</span><br><span class="line">      <span class="string">"total_count"</span> : 0,</span><br><span class="line">      <span class="string">"hit_count"</span> : 0,</span><br><span class="line">      <span class="string">"miss_count"</span> : 0,</span><br><span class="line">      <span class="string">"cache_size"</span> : 0,</span><br><span class="line">      <span class="string">"cache_count"</span> : 0,</span><br><span class="line">      <span class="string">"evictions"</span> : 0</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"completion"</span> : {</span><br><span class="line">      <span class="string">"size_in_bytes"</span> : 0</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"segments"</span> : {</span><br><span class="line">      <span class="string">"count"</span> : 232,</span><br><span class="line">      <span class="string">"memory_in_bytes"</span> : 2724556,</span><br><span class="line">      <span class="string">"terms_memory_in_bytes"</span> : 1517004,</span><br><span class="line">      <span class="string">"stored_fields_memory_in_bytes"</span> : 217952,</span><br><span class="line">      <span class="string">"term_vectors_memory_in_bytes"</span> : 0,</span><br><span class="line">      <span class="string">"norms_memory_in_bytes"</span> : 22784,</span><br><span class="line">      <span class="string">"points_memory_in_bytes"</span> : 308688,</span><br><span class="line">      <span class="string">"doc_values_memory_in_bytes"</span> : 658128,</span><br><span class="line">      <span class="string">"index_writer_memory_in_bytes"</span> : 0,</span><br><span class="line">      <span class="string">"version_map_memory_in_bytes"</span> : 0,</span><br><span class="line">      <span class="string">"fixed_bit_set_memory_in_bytes"</span> : 147152,</span><br><span class="line">      <span class="string">"max_unsafe_auto_id_timestamp"</span> : 1545800638659,</span><br><span class="line">      <span class="string">"file_sizes"</span> : { }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="string">"nodes"</span> : {</span><br><span class="line">    <span class="string">"count"</span> : {</span><br><span class="line">      <span class="string">"total"</span> : 3,</span><br><span class="line">      <span class="string">"data"</span> : 3,</span><br><span class="line">      <span class="string">"coordinating_only"</span> : 0,</span><br><span class="line">      <span class="string">"master"</span> : 3,</span><br><span class="line">      <span class="string">"ingest"</span> : 3</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"versions"</span> : [</span><br><span class="line">      <span class="string">"6.5.3"</span>,</span><br><span class="line">      <span class="string">"6.5.4"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"os"</span> : {</span><br><span class="line">      <span class="string">"available_processors"</span> : 4,</span><br><span class="line">      <span class="string">"allocated_processors"</span> : 4,</span><br><span class="line">      <span class="string">"names"</span> : [</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"name"</span> : <span class="string">"Linux"</span>,</span><br><span class="line">          <span class="string">"count"</span> : 3</span><br><span class="line">        }</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">"mem"</span> : {</span><br><span class="line">        <span class="string">"total_in_bytes"</span> : 5866811392,</span><br><span class="line">        <span class="string">"free_in_bytes"</span> : 209567744,</span><br><span class="line">        <span class="string">"used_in_bytes"</span> : 5657243648,</span><br><span class="line">        <span class="string">"free_percent"</span> : 4,</span><br><span class="line">        <span class="string">"used_percent"</span> : 96</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"process"</span> : {</span><br><span class="line">      <span class="string">"cpu"</span> : {</span><br><span class="line">        <span class="string">"percent"</span> : 18</span><br><span class="line">      },</span><br><span class="line">      <span class="string">"open_file_descriptors"</span> : {</span><br><span class="line">        <span class="string">"min"</span> : 252,</span><br><span class="line">        <span class="string">"max"</span> : 331,</span><br><span class="line">        <span class="string">"avg"</span> : 301</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"jvm"</span> : {</span><br><span class="line">      <span class="string">"max_uptime_in_millis"</span> : 3270812,</span><br><span class="line">      <span class="string">"versions"</span> : [</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"version"</span> : <span class="string">"1.8.0_191"</span>,</span><br><span class="line">          <span class="string">"vm_name"</span> : <span class="string">"Java HotSpot(TM) 64-Bit Server VM"</span>,</span><br><span class="line">          <span class="string">"vm_version"</span> : <span class="string">"25.191-b12"</span>,</span><br><span class="line">          <span class="string">"vm_vendor"</span> : <span class="string">"Oracle Corporation"</span>,</span><br><span class="line">          <span class="string">"count"</span> : 1</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"version"</span> : <span class="string">"1.8.0_161"</span>,</span><br><span class="line">          <span class="string">"vm_name"</span> : <span class="string">"Java HotSpot(TM) 64-Bit Server VM"</span>,</span><br><span class="line">          <span class="string">"vm_version"</span> : <span class="string">"25.161-b12"</span>,</span><br><span class="line">          <span class="string">"vm_vendor"</span> : <span class="string">"Oracle Corporation"</span>,</span><br><span class="line">          <span class="string">"count"</span> : 1</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"version"</span> : <span class="string">"1.8.0_171"</span>,</span><br><span class="line">          <span class="string">"vm_name"</span> : <span class="string">"Java HotSpot(TM) 64-Bit Server VM"</span>,</span><br><span class="line">          <span class="string">"vm_version"</span> : <span class="string">"25.171-b11"</span>,</span><br><span class="line">          <span class="string">"vm_vendor"</span> : <span class="string">"Oracle Corporation"</span>,</span><br><span class="line">          <span class="string">"count"</span> : 1</span><br><span class="line">        }</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">"mem"</span> : {</span><br><span class="line">        <span class="string">"heap_used_in_bytes"</span> : 925867600,</span><br><span class="line">        <span class="string">"heap_max_in_bytes"</span> : 3186360320</span><br><span class="line">      },</span><br><span class="line">      <span class="string">"threads"</span> : 115</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"fs"</span> : {</span><br><span class="line">      <span class="string">"total_in_bytes"</span> : 127439097856,</span><br><span class="line">      <span class="string">"free_in_bytes"</span> : 37985562624,</span><br><span class="line">      <span class="string">"available_in_bytes"</span> : 33092489216</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"plugins"</span> : [ ],</span><br><span class="line">    <span class="string">"network_types"</span> : {</span><br><span class="line">      <span class="string">"transport_types"</span> : {</span><br><span class="line">        <span class="string">"security4"</span> : 3</span><br><span class="line">      },</span><br><span class="line">      <span class="string">"http_types"</span> : {</span><br><span class="line">        <span class="string">"security4"</span> : 3</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">$ curl 192.168.106.213:9200/_cluster/settings?pretty</span><br><span class="line">{</span><br><span class="line">  <span class="string">"persistent"</span> : {</span><br><span class="line">    <span class="string">"xpack"</span> : {</span><br><span class="line">      <span class="string">"monitoring"</span> : {</span><br><span class="line">        <span class="string">"collection"</span> : {</span><br><span class="line">          <span class="string">"enabled"</span> : <span class="string">"true"</span></span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="string">"transient"</span> : { }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+      <img src="./ELK安装配置文档_files/cc.png">
+      
+          <img src="./ELK安装配置文档_files/by.png">
+        
+          <img src="./ELK安装配置文档_files/sa.png">
+      
+      <span>
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 冯 丨 凯 - Powered by Hexo - Shaddy
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="./ELK安装配置文档_files/jquery.min.js.下载"></script>
+
+  <link rel="stylesheet" href="./ELK安装配置文档_files/photoswipe.css">
+  <link rel="stylesheet" href="./ELK安装配置文档_files/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./ELK安装配置文档_files/photoswipe.js.下载"></script>
+  <script src="./ELK安装配置文档_files/photoswipe-ui-default.js.下载"></script>
+
+
+<script src="./ELK安装配置文档_files/perfect-scrollbar.min.js.下载"></script>
+<script src="./ELK安装配置文档_files/main.js.下载"></script>
+
+
+
+</body></html>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/06/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/06/database/elk部分/ELK安装配置文档_files/default-skin/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">冯 丨 凯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">
+      ELK安装配置文档
+    </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">elasticsearch 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">linux环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">创建elk用户并设置elk用户的密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">设置linux环境参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">java环境配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">elasticsearch安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">kibana安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">kibana汉化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">kafka的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">kafka安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.</span> <span class="nav-text">kafka测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">logstash安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">filebeat安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">logstash 配置示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">elasticsearch 集群配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">elasticsearch使用示例【集群模式下】</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
